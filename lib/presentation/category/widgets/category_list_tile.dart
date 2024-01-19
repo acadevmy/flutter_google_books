@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_books/presentation/models/category.dart';
 
 class CategoryListTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
+  final Category category;
 
   const CategoryListTile({
     super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
+    required this.category,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-        subtitle: Text(subtitle),
+        leading: Icon(category.icon),
+        title: Text(category.title),
+        subtitle: Text(category.subtitle),
       ),
     );
   }

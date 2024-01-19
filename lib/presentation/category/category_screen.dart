@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_google_books/presentation/category/widgets/category_list_tile.dart';
+import 'package:flutter_google_books/presentation/category/widgets/category_list_view.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -10,14 +10,10 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter Google Books'),
       ),
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          child: CategoryListTile(
-            icon: Icons.soup_kitchen,
-            title: 'La cucina per tutti di Casa Pappagallo',
-            subtitle: 'Un ricettario che celebra il cibo e la condivisione',
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+          child: CategoryListView(),
         ),
       ),
     );
