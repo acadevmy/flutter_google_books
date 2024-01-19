@@ -14,15 +14,28 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('You have created your first screen:'),
-              Text(
-                'Home',
-                style: Theme.of(context).textTheme.headlineMedium,
+              SizedBox(
+                width: 300.0,
+                child: Text(
+                  'Flutter Google Books',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              const Image(
+                image: AssetImage('assets/images/bibliophile.png'),
+                width: 350.0,
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () => Navigator.pushNamed(context, '/category'),
-                child: const Text('Go to CategoryScreen'),
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(const Size(250.0, 50.0)),
+                ),
+                child: const Text('Show Categories'),
               ),
             ],
           ),
