@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
@@ -37,18 +38,29 @@ class VolumeOverviewScreen extends StatelessWidget {
               const SizedBox(height: 30.0),
               BlocProvider(
                 create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
-                child: BlocBuilder<VolumeOverviewCubit, VolumeOverviewState>(
-                  builder: (context, state) {
-                    if (state is VolumeOverviewLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                child: BlocListener<VolumeOverviewCubit, VolumeOverviewState>(
+                  listener: (context, state) {
+                    if (state is VolumeOverviewFailure) {
+                      FlushbarHelper.createError(
+                        title: 'Error',
+                        message: state.error,
+                        duration: const Duration(seconds: 3),
+                      ).show(context);
                     }
-
-                    if (state is VolumeOverviewSuccess) {
-                      return VolumeListView(volumes: state.volumes);
-                    }
-
-                    return const SizedBox();
                   },
+                  child: BlocBuilder<VolumeOverviewCubit, VolumeOverviewState>(
+                    builder: (context, state) {
+                      if (state is VolumeOverviewLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (state is VolumeOverviewSuccess) {
+                        return VolumeListView(volumes: state.volumes);
+                      }
+
+                      return const SizedBox();
+                    },
+                  ),
                 ),
               ),
             ],

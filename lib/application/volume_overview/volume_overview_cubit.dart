@@ -19,7 +19,7 @@ class VolumeOverviewCubit extends Cubit<VolumeOverviewState> {
       final volumes = await _volumeRepository.getByCategory(category);
 
       emit(VolumeOverviewSuccess(volumes: volumes));
-    } on Exception {
+    } on Error {
       emit(VolumeOverviewFailure(error: 'Unexpected error occurred'));
     }
   }
