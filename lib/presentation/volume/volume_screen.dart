@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_books/application/repositories/i_volume_repository.dart';
+import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
-import 'package:flutter_google_books/presentation/volume/widgets/volume_list_tile.dart';
+import 'package:flutter_google_books/presentation/volume/widgets/volume_list_view.dart';
 
 class VolumeScreen extends StatelessWidget {
   const VolumeScreen({super.key});
@@ -32,10 +34,15 @@ class VolumeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30.0),
-              const VolumeListTile(
-                thumbnail: 'https://shorturl.at/zLU09',
-                title: 'La cucina per tutti di Casa Pappagallo',
-                description: 'Un ricettario che celebra il cibo e la condivisione',
+              FutureBuilder(
+                future: getIt<IVolumeRepository>().getByCategory(args.title),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return VolumeListView(volumes: snapshot.requireData);
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
+                },
               ),
             ],
           ),
