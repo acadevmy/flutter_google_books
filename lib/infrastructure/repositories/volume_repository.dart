@@ -11,9 +11,12 @@ class VolumeRepository implements IVolumeRepository {
   final _baseUrl = 'https://www.googleapis.com';
 
   @override
-  Future<List<Volume>> searchBy(String title) {
-    // TODO: implement searchBy
-    throw UnimplementedError();
+  Future<List<Volume>> searchBy(String title) async {
+    final response = await http.get(Uri.parse('$_baseUrl/books/v1/volumes?q=$title'));
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+    final items = VolumeResponseDto.fromJson(decoded).items;
+
+    return items.map((item) => item.toDomain()).toList();
   }
 
   @override
