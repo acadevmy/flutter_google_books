@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_google_books/application/repositories/i_volume_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
 import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_view.dart';
@@ -34,15 +35,21 @@ class VolumeOverviewScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30.0),
-              FutureBuilder(
-                future: getIt<IVolumeRepository>().getByCategory(args.title),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return VolumeListView(volumes: snapshot.requireData);
-                  }
+              BlocProvider(
+                create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
+                child: BlocBuilder<VolumeOverviewCubit, VolumeOverviewState>(
+                  builder: (context, state) {
+                    if (state is VolumeOverviewLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                  return const Center(child: CircularProgressIndicator());
-                },
+                    if (state is VolumeOverviewSuccess) {
+                      return VolumeListView(volumes: state.volumes);
+                    }
+
+                    return const SizedBox();
+                  },
+                ),
               ),
             ],
           ),
