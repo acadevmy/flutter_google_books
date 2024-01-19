@@ -38,7 +38,7 @@ class VolumeOverviewScreen extends StatelessWidget {
               const SizedBox(height: 30.0),
               BlocProvider(
                 create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
-                child: BlocListener<VolumeOverviewCubit, VolumeOverviewState>(
+                child: BlocConsumer<VolumeOverviewCubit, VolumeOverviewState>(
                   listener: (context, state) {
                     if (state is VolumeOverviewFailure) {
                       FlushbarHelper.createError(
@@ -48,19 +48,17 @@ class VolumeOverviewScreen extends StatelessWidget {
                       ).show(context);
                     }
                   },
-                  child: BlocBuilder<VolumeOverviewCubit, VolumeOverviewState>(
-                    builder: (context, state) {
-                      if (state is VolumeOverviewLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
+                  builder: (context, state) {
+                    if (state is VolumeOverviewLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                      if (state is VolumeOverviewSuccess) {
-                        return VolumeListView(volumes: state.volumes);
-                      }
+                    if (state is VolumeOverviewSuccess) {
+                      return VolumeListView(volumes: state.volumes);
+                    }
 
-                      return const SizedBox();
-                    },
-                  ),
+                    return const SizedBox();
+                  },
                 ),
               ),
             ],
