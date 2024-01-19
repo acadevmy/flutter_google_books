@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_books/domain/entities/volume.dart';
-import 'package:flutter_google_books/presentation/volume/widgets/volume_list_tile.dart';
+import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_tile.dart';
 
 class VolumeListView extends StatelessWidget {
   final List<Volume> volumes;

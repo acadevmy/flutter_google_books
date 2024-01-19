@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_google_books/application/repositories/i_volume_repository.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
-import 'package:flutter_google_books/presentation/volume/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_view.dart';
 
-class VolumeScreen extends StatelessWidget {
-  const VolumeScreen({super.key});
+class VolumeOverviewScreen extends StatelessWidget {
+  const VolumeOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

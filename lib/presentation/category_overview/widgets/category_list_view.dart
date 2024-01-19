@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_google_books/presentation/category/widgets/category_list_tile.dart';
+import 'package:flutter_google_books/presentation/category_overview/widgets/category_list_tile.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
 
 class CategoryListView extends StatelessWidget {

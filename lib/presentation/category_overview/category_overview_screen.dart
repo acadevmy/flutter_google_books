@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_books/application/repositories/i_volume_repository.dart';
 import 'package:flutter_google_books/injection.dart';
-import 'package:flutter_google_books/presentation/category/widgets/category_list_view.dart';
-import 'package:flutter_google_books/presentation/volume/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/category_overview/widgets/category_list_view.dart';
+import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_view.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CategoryScreen extends HookWidget {
-  const CategoryScreen({super.key});
+class CategoryOverviewScreen extends HookWidget {
+  const CategoryOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class CategoryScreen extends HookWidget {
                   builder: (context) {
                     if (controller.text.isEmpty) {
                       return CategoryListView(
-                        onTap: (category) => Navigator.pushNamed(context, '/volume', arguments: category),
+                        onTap: (category) => Navigator.pushNamed(context, '/volumes', arguments: category),
                       );
                     }
 

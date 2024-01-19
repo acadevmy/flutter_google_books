@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_google_books/injection.dart';
-import 'package:flutter_google_books/presentation/category/category_screen.dart';
+import 'package:flutter_google_books/presentation/category_overview/category_overview_screen.dart';
 import 'package:flutter_google_books/presentation/home/home_screen.dart';
-import 'package:flutter_google_books/presentation/volume/volume_screen.dart';
+import 'package:flutter_google_books/presentation/volume_overview/volume_overview_screen.dart';
 import 'package:json_theme/json_theme.dart';
 
 void main() async {
@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const HomeScreen(),
-        '/category': (_) => const CategoryScreen(),
-        '/volume': (_) => const VolumeScreen(),
+        '/categories': (_) => const CategoryOverviewScreen(),
+        '/volumes': (_) => const VolumeOverviewScreen(),
       },
     );
   }

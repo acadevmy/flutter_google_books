@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: () => Navigator.pushReplacementNamed(context, '/category'),
+                onPressed: () => Navigator.pushReplacementNamed(context, '/categories'),
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(const Size(250.0, 50.0)),
                 ),
