@@ -38,6 +38,7 @@ app.*.symbols
 app.*.map.json
 
 # Auto generated
+*.config.dart
 *.freezed.dart
 *.g.dart
 
