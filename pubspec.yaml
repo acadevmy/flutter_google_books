@@ -11,11 +11,13 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   json_theme: ^6.4.0
+  freezed: ^2.4.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.8
 
 flutter:
   uses-material-design: true
