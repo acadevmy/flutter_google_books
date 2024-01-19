@@ -39,26 +39,23 @@ class VolumeOverviewScreen extends StatelessWidget {
               BlocProvider(
                 create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
                 child: BlocConsumer<VolumeOverviewCubit, VolumeOverviewState>(
-                  listener: (context, state) {
-                    if (state is VolumeOverviewFailure) {
+                  listener: (context, state) => state.maybeWhen(
+                    failure: (error) {
                       FlushbarHelper.createError(
                         title: 'Error',
-                        message: state.error,
+                        message: error,
                         duration: const Duration(seconds: 3),
                       ).show(context);
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is VolumeOverviewLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
 
-                    if (state is VolumeOverviewSuccess) {
-                      return VolumeListView(volumes: state.volumes);
-                    }
-
-                    return const SizedBox();
-                  },
+                      return null;
+                    },
+                    orElse: () => null,
+                  ),
+                  builder: (context, state) => state.maybeWhen(
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    success: (volumes) => VolumeListView(volumes: volumes),
+                    orElse: () => const SizedBox(),
+                  ),
                 ),
               ),
             ],

@@ -1,20 +1,12 @@
 part of 'volume_overview_cubit.dart';
 
-@immutable
-abstract class VolumeOverviewState {}
+@freezed
+class VolumeOverviewState with _$VolumeOverviewState {
+  const factory VolumeOverviewState.initial() = _Initial;
 
-class VolumeOverviewInitial extends VolumeOverviewState {}
+  const factory VolumeOverviewState.loading() = _Loading;
 
-class VolumeOverviewLoading extends VolumeOverviewState {}
+  const factory VolumeOverviewState.success(List<Volume> volumes) = _Success;
 
-class VolumeOverviewSuccess extends VolumeOverviewState {
-  final List<Volume> volumes;
-
-  VolumeOverviewSuccess({required this.volumes});
-}
-
-class VolumeOverviewFailure extends VolumeOverviewState {
-  final String error;
-
-  VolumeOverviewFailure({required this.error});
+  const factory VolumeOverviewState.failure(String error) = _Failure;
 }
