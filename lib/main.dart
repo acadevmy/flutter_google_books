@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_google_books/presentation/category/category_screen.dart';
 import 'package:flutter_google_books/presentation/home/home_screen.dart';
 import 'package:json_theme/json_theme.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const HomeScreen(),
+        '/category': (_) => const CategoryScreen(),
       },
     );
   }

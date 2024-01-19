@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +14,10 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('You have created your first screen:'),
+              const Text('You have created your second screen:'),
               Text(
-                'Home',
+                'Category',
                 style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/category'),
-                child: const Text('Go to CategoryScreen'),
               ),
             ],
           ),
