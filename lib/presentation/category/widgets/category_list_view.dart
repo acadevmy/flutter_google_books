@@ -3,6 +3,8 @@ import 'package:flutter_google_books/presentation/category/widgets/category_list
 import 'package:flutter_google_books/presentation/models/category.dart';
 
 class CategoryListView extends StatelessWidget {
+  final ValueChanged<Category> onTap;
+
   final List<Category> _items = [
     Category(
       icon: Icons.book,
@@ -36,14 +38,20 @@ class CategoryListView extends StatelessWidget {
     ),
   ];
 
-  CategoryListView({super.key});
+  CategoryListView({
+    super.key,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
         itemCount: _items.length,
-        itemBuilder: (context, index) => CategoryListTile(category: _items[index]),
+        itemBuilder: (context, index) => CategoryListTile(
+          onTap: () => onTap(_items[index]),
+          category: _items[index],
+        ),
         separatorBuilder: (_, __) => const SizedBox(height: 10.0),
       ),
     );

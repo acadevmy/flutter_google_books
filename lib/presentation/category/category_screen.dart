@@ -13,7 +13,13 @@ class CategoryScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          child: CategoryListView(),
+          child: Column(
+            children: [
+              Text('Categories', style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: 20.0),
+              CategoryListView(onTap: (category) => Navigator.pushNamed(context, '/volume', arguments: category)),
+            ],
+          ),
         ),
       ),
     );
