@@ -21,16 +21,13 @@ class FavoriteOverviewScreen extends StatelessWidget {
             children: <Widget>[
               const Headline(title: 'Favorites', icon: Icons.favorite),
               const SizedBox(height: 30.0),
-              BlocProvider(
-                create: (_) => getIt<VolumeDetailsCubit>(),
-                child: BlocBuilder<VolumeDetailsCubit, VolumeDetailsState>(
-                  builder: (context, state) {
-                    return VolumeListView(
-                      onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
-                      volumes: state.favorites,
-                    );
-                  },
-                ),
+              BlocBuilder<VolumeDetailsCubit, VolumeDetailsState>(
+                builder: (context, state) {
+                  return VolumeListView(
+                    onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
+                    volumes: state.favorites,
+                  );
+                },
               ),
             ],
           ),
