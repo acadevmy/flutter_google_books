@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/category_overview/widgets/category_list_view.dart';
-import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/widgets/favorite_fab.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class CategoryOverviewScreen extends HookWidget {
@@ -94,6 +95,9 @@ class CategoryOverviewScreen extends HookWidget {
               ),
             ),
           ),
+        ),
+        floatingActionButton: FavoriteFab(
+          onPressed: () => Navigator.of(context).pushNamed('/favorites'),
         ),
       ),
     );

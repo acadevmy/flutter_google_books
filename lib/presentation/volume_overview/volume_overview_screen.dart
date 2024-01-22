@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
-import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/widgets/headline.dart';
+import 'package:flutter_google_books/presentation/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/presentation/widgets/favorite_fab.dart';
 
 class VolumeOverviewScreen extends StatelessWidget {
   const VolumeOverviewScreen({super.key});
@@ -23,18 +25,7 @@ class VolumeOverviewScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           child: Column(
             children: <Widget>[
-              RichText(
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(child: Icon(args.icon, color: color, size: 30.0)),
-                    const WidgetSpan(child: SizedBox(width: 10.0)),
-                    TextSpan(
-                      text: args.title,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: color),
-                    ),
-                  ],
-                ),
-              ),
+              Headline(title: args.title, icon: args.icon, iconColor: color),
               const SizedBox(height: 30.0),
               BlocProvider(
                 create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
@@ -64,6 +55,9 @@ class VolumeOverviewScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FavoriteFab(
+        onPressed: () => Navigator.of(context).pushNamed('/favorites'),
       ),
     );
   }

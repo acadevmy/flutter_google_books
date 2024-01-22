@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_books/domain/entities/volume.dart';
 import 'package:flutter_google_books/presentation/models/tap_callback.dart';
-import 'package:flutter_google_books/presentation/volume_overview/widgets/volume_list_tile.dart';
+import 'package:flutter_google_books/presentation/widgets/volume_list_tile.dart';
 
 class VolumeListView extends StatelessWidget {
   final TapCallback<Volume> onTap;
