@@ -13,6 +13,18 @@ class VolumeOverviewCubit extends Cubit<VolumeOverviewState> {
 
   VolumeOverviewCubit(this._volumeRepository) : super(const VolumeOverviewState.initial());
 
+  void searchBy(String title) async {
+    try {
+      emit(const VolumeOverviewState.loading());
+
+      final volumes = await _volumeRepository.searchBy(title);
+
+      emit(VolumeOverviewState.success(volumes));
+    } on Error {
+      emit(const VolumeOverviewState.failure('Unexpected error occurred'));
+    }
+  }
+
   void getByCategory(String category) async {
     try {
       emit(const VolumeOverviewState.loading());
