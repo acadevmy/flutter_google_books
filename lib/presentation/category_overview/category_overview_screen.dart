@@ -81,7 +81,10 @@ class CategoryOverviewScreen extends HookWidget {
                       if (controller.text.isNotEmpty) ...[
                         state.maybeWhen(
                           loading: () => const Center(child: CircularProgressIndicator()),
-                          success: (volumes) => VolumeListView(volumes: volumes),
+                          success: (volumes) => VolumeListView(
+                            onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
+                            volumes: volumes,
+                          ),
                           orElse: () => const SizedBox(),
                         ),
                       ],

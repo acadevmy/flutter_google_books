@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/category_overview/category_overview_screen.dart';
 import 'package:flutter_google_books/presentation/home/home_screen.dart';
+import 'package:flutter_google_books/presentation/volume_details/volume_details_screen.dart';
 import 'package:flutter_google_books/presentation/volume_overview/volume_overview_screen.dart';
 import 'package:json_theme/json_theme.dart';
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => const HomeScreen(),
         '/categories': (_) => const CategoryOverviewScreen(),
         '/volumes': (_) => const VolumeOverviewScreen(),
+        '/volume': (_) => const VolumeDetailsScreen(),
       },
     );
   }

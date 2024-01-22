@@ -15,4 +15,10 @@ class VolumeInfo with _$VolumeInfo {
     required int ratingsCount,
     required ImageLinks imageLinks,
   }) = _VolumeInfo;
+
+  VolumeInfo._();
+
+  String get categoriesAsString => categories.join(', ');
+
+  String get authorsAsString => authors.join(', ');
 }
