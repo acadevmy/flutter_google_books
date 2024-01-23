@@ -13,8 +13,8 @@ import 'package:flutter_google_books/presentation/volume_overview/volume_overvie
 import 'package:json_theme/json_theme.dart';
 
 void main() async {
-  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
 
   final json = await rootBundle.loadString('assets/appainter_theme.json');
   final theme = ThemeDecoder.decodeThemeData(jsonDecode(json))!;
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<VolumeDetailsCubit>(),
+      create: (_) => getIt<VolumeDetailsCubit>()..load(),
       child: MaterialApp(
         theme: theme,
         initialRoute: '/',
