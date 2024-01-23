@@ -1,20 +1,27 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
 import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
+import 'package:flutter_google_books/presentation/widgets/favorite_fab.dart';
 import 'package:flutter_google_books/presentation/widgets/headline.dart';
 import 'package:flutter_google_books/presentation/widgets/volume_list_view.dart';
-import 'package:flutter_google_books/presentation/widgets/favorite_fab.dart';
+import 'package:flutter_google_books/router.dart';
 
+@RoutePage()
 class VolumeOverviewScreen extends StatelessWidget {
-  const VolumeOverviewScreen({super.key});
+  final Category category;
+
+  const VolumeOverviewScreen({
+    super.key,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
-    final args = ModalRoute.of(context)!.settings.arguments as Category;
 
     return Scaffold(
       appBar: AppBar(
@@ -25,10 +32,14 @@ class VolumeOverviewScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           child: Column(
             children: <Widget>[
-              Headline(title: args.title, icon: args.icon, iconColor: color),
+              Headline(
+                title: category.title,
+                icon: category.icon,
+                iconColor: color,
+              ),
               const SizedBox(height: 30.0),
               BlocProvider(
-                create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(args.title),
+                create: (_) => getIt<VolumeOverviewCubit>()..getByCategory(category.title),
                 child: BlocConsumer<VolumeOverviewCubit, VolumeOverviewState>(
                   listener: (context, state) => state.maybeWhen(
                     failure: (error) {
@@ -45,7 +56,7 @@ class VolumeOverviewScreen extends StatelessWidget {
                   builder: (context, state) => state.maybeWhen(
                     loading: () => const Center(child: CircularProgressIndicator()),
                     success: (volumes) => VolumeListView(
-                      onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
+                      onTap: (volume) => context.pushRoute(VolumeDetailsRoute(volume: volume)),
                       volumes: volumes,
                     ),
                     orElse: () => const SizedBox(),
@@ -57,7 +68,7 @@ class VolumeOverviewScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FavoriteFab(
-        onPressed: () => Navigator.of(context).pushNamed('/favorites'),
+        onPressed: () => context.pushRoute(const FavoriteOverviewRoute()),
       ),
     );
   }

@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_details/volume_details_cubit.dart';
-import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/widgets/headline.dart';
 import 'package:flutter_google_books/presentation/widgets/volume_list_view.dart';
+import 'package:flutter_google_books/router.dart';
 
+@RoutePage()
 class FavoriteOverviewScreen extends StatelessWidget {
   const FavoriteOverviewScreen({super.key});
 
@@ -24,7 +26,7 @@ class FavoriteOverviewScreen extends StatelessWidget {
               BlocBuilder<VolumeDetailsCubit, VolumeDetailsState>(
                 builder: (context, state) {
                   return VolumeListView(
-                    onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
+                    onTap: (volume) => context.pushRoute(VolumeDetailsRoute(volume: volume)),
                     volumes: state.favorites,
                   );
                 },

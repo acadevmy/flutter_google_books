@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_google_books/router.dart';
 
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: () => Navigator.pushReplacementNamed(context, '/categories'),
+                onPressed: () => context.replaceRoute(const CategoryOverviewRoute()),
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(const Size(250.0, 50.0)),
                 ),

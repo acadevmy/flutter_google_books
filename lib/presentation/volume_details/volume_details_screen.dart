@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_details/volume_details_cubit.dart';
@@ -5,16 +6,20 @@ import 'package:flutter_google_books/domain/entities/volume.dart';
 import 'package:flutter_google_books/presentation/volume_details/widgets/volume_info.dart';
 import 'package:flutter_google_books/presentation/volume_details/widgets/volume_rating.dart';
 
+@RoutePage()
 class VolumeDetailsScreen extends StatelessWidget {
-  const VolumeDetailsScreen({super.key});
+  final Volume volume;
+
+  const VolumeDetailsScreen({
+    super.key,
+    required this.volume,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Volume;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.volumeInfo.title),
+        title: Text(volume.volumeInfo.title),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -26,12 +31,12 @@ class VolumeDetailsScreen extends StatelessWidget {
               children: <Widget>[
                 Align(
                   alignment: Alignment.center,
-                  child: Image.network(args.volumeInfo.imageLinks.thumbnail),
+                  child: Image.network(volume.volumeInfo.imageLinks.thumbnail),
                 ),
                 const SizedBox(height: 20.0),
-                VolumeInfo(label: 'Categories:', description: args.volumeInfo.categoriesAsString),
+                VolumeInfo(label: 'Categories:', description: volume.volumeInfo.categoriesAsString),
                 const SizedBox(height: 20.0),
-                VolumeInfo(label: 'Authors:', description: args.volumeInfo.authorsAsString),
+                VolumeInfo(label: 'Authors:', description: volume.volumeInfo.authorsAsString),
                 const SizedBox(height: 20.0),
                 Text(
                   'Description:',
@@ -39,12 +44,12 @@ class VolumeDetailsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 Text(
-                  args.volumeInfo.description,
+                  volume.volumeInfo.description,
                   textAlign: TextAlign.justify,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 20.0),
-                VolumeRating(initialRating: args.volumeInfo.averageRating),
+                VolumeRating(initialRating: volume.volumeInfo.averageRating),
               ],
             ),
           ),
@@ -53,16 +58,16 @@ class VolumeDetailsScreen extends StatelessWidget {
       floatingActionButton: BlocBuilder<VolumeDetailsCubit, VolumeDetailsState>(
         builder: (context, state) {
           final cubit = context.read<VolumeDetailsCubit>();
-          final icon = cubit.hasFavorite(args) ? Icons.favorite : Icons.favorite_outline;
+          final icon = cubit.hasFavorite(volume) ? Icons.favorite : Icons.favorite_outline;
 
           return FloatingActionButton(
             onPressed: () {
-              if (cubit.hasFavorite(args)) {
-                cubit.removeFavorite(args);
+              if (cubit.hasFavorite(volume)) {
+                cubit.removeFavorite(volume);
                 return;
               }
 
-              cubit.addFavorite(args);
+              cubit.addFavorite(volume);
             },
             shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100.0))),
             child: Icon(icon),

@@ -5,11 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_details/volume_details_cubit.dart';
 import 'package:flutter_google_books/injection.dart';
-import 'package:flutter_google_books/presentation/category_overview/category_overview_screen.dart';
-import 'package:flutter_google_books/presentation/favorite_overview_screen/favorite_overview_screen.dart';
-import 'package:flutter_google_books/presentation/home/home_screen.dart';
-import 'package:flutter_google_books/presentation/volume_details/volume_details_screen.dart';
-import 'package:flutter_google_books/presentation/volume_overview/volume_overview_screen.dart';
+import 'package:flutter_google_books/router.dart';
 import 'package:json_theme/json_theme.dart';
 
 void main() async {
@@ -23,27 +19,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final _appRouter = AppRouter();
+
   final ThemeData theme;
 
-  const MyApp({
-    super.key,
-    required this.theme,
-  });
+  MyApp({super.key, required this.theme});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<VolumeDetailsCubit>()..load(),
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: _appRouter.config(),
         theme: theme,
-        initialRoute: '/',
-        routes: {
-          '/': (_) => const HomeScreen(),
-          '/categories': (_) => const CategoryOverviewScreen(),
-          '/volumes': (_) => const VolumeOverviewScreen(),
-          '/volume': (_) => const VolumeDetailsScreen(),
-          '/favorites': (_) => const FavoriteOverviewScreen(),
-        },
       ),
     );
   }

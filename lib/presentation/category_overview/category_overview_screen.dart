@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_books/application/volume_overview/volume_overview_cubit.dart';
@@ -6,8 +7,10 @@ import 'package:flutter_google_books/injection.dart';
 import 'package:flutter_google_books/presentation/category_overview/widgets/category_list_view.dart';
 import 'package:flutter_google_books/presentation/widgets/volume_list_view.dart';
 import 'package:flutter_google_books/presentation/widgets/favorite_fab.dart';
+import 'package:flutter_google_books/router.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+@RoutePage()
 class CategoryOverviewScreen extends HookWidget {
   const CategoryOverviewScreen({super.key});
 
@@ -76,14 +79,14 @@ class CategoryOverviewScreen extends HookWidget {
                       const SizedBox(height: 20.0),
                       if (controller.text.isEmpty) ...[
                         CategoryListView(
-                          onTap: (category) => Navigator.pushNamed(context, '/volumes', arguments: category),
+                          onTap: (category) => context.pushRoute(VolumeOverviewRoute(category: category)),
                         ),
                       ],
                       if (controller.text.isNotEmpty) ...[
                         state.maybeWhen(
                           loading: () => const Center(child: CircularProgressIndicator()),
                           success: (volumes) => VolumeListView(
-                            onTap: (value) => Navigator.pushNamed(context, '/volume', arguments: value),
+                            onTap: (volume) => context.pushRoute(VolumeDetailsRoute(volume: volume)),
                             volumes: volumes,
                           ),
                           orElse: () => const SizedBox(),
@@ -97,7 +100,7 @@ class CategoryOverviewScreen extends HookWidget {
           ),
         ),
         floatingActionButton: FavoriteFab(
-          onPressed: () => Navigator.of(context).pushNamed('/favorites'),
+          onPressed: () => context.pushRoute(const FavoriteOverviewRoute()),
         ),
       ),
     );
