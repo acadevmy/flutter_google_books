@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557201337816",
+    "project_id": "flutter-zero-to-hero-f4099",
+    "storage_bucket": "flutter-zero-to-hero-f4099.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557201337816:android:54ddbb380e1cf9867096ad",
+        "android_client_info": {
+          "package_name": "com.example.flutter_google_books"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzi4MfC3zsfkHi8Dn1SuGhgADZyJxi8bY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
