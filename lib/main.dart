@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_google_books/application/auth/sign_in_cubit.dart';
 import 'package:flutter_google_books/application/volume_details/volume_details_cubit.dart';
 import 'package:flutter_google_books/firebase_options.dart';
 import 'package:flutter_google_books/injection.dart';
