@@ -7,6 +7,7 @@ import 'package:flutter_google_books/presentation/home/home_screen.dart';
 import 'package:flutter_google_books/presentation/models/category.dart';
 import 'package:flutter_google_books/presentation/volume_details/volume_details_screen.dart';
 import 'package:flutter_google_books/presentation/volume_overview/volume_overview_screen.dart';
+import 'package:flutter_google_books/presentation/sign_up/sign_up_screen.dart';
 
 part 'router.gr.dart';
 
@@ -19,5 +20,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: VolumeOverviewRoute.page),
         AutoRoute(page: VolumeDetailsRoute.page),
         AutoRoute(page: FavoriteOverviewRoute.page),
+        AutoRoute(page: SignUpRoute.page),
       ];
 }
